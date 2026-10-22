@@ -1,0 +1,70 @@
+// Online Java Compiler (Editor)
+// Write and run Java online using this editor.
+class Ticket {
+    private String movieName;
+    private int ticketPrice;
+    private int availableSeats;
+    Ticket(String mn,int tp,int as){
+        this.movieName=mn;
+        this.ticketPrice=tp;
+        this.availableSeats=as;
+    }
+    public String getMovieName(){
+        return movieName;
+    }
+     public int getTicketPrice(){
+        return ticketPrice;
+    }
+     public int getAvailableSeats(){
+        return availableSeats;
+    }
+    public void displayDetails(){
+        System.out.println("movie name"+ movieName);
+         System.out.println("ticket price"+ ticketPrice);
+         System.out.println("available seats"+ availableSeats);
+    }
+
+    public void reduceAvailableSeats(int count) {
+    availableSeats = availableSeats - count;
+}
+}
+class MovieTicket extends Ticket{
+   private int seatBooked;
+    MovieTicket(String movieName,int ticketPrice,int availableSeats,int seatBooked){
+        super(movieName,ticketPrice,availableSeats);
+        this.seatBooked=seatBooked;
+    }
+    @Override
+    public void displayDetails(){
+          System.out.println("--- Movie Booking Details ---");
+        System.out.println("Movie Title : " + super.getMovieName());
+         System.out.println("ticket price"+ super.getTicketPrice());
+         System.out.println("available seats"+ super.getAvailableSeats());
+        System.out.println("Seats Booked: " + seatBooked);
+      
+    }
+    public void bookTickets(int count){
+       if (count <= 0) {
+        System.out.println("Invalid ticket count");
+    } else if (count > getAvailableSeats()) {
+        System.out.println("Not enough seats available");
+    } else {
+        seatBooked = seatBooked + count;
+        reduceAvailableSeats(count);
+        System.out.println("Tickets booked successfully!");
+
+
+    }
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        MovieTicket m1=new MovieTicket("pushpa",500,6,2);
+       
+
+    m1.bookTickets(3);
+
+    m1.displayDetails();
+
+    }
+}
